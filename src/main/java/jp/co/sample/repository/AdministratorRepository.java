@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 
 import jp.co.sample.domain.Administrator;
 
+/**
+ * @author 土田真丸
+ *
+ */
 @Repository
 
 public class AdministratorRepository {
