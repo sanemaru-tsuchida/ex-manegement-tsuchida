@@ -17,6 +17,10 @@ import org.springframework.stereotype.Repository;
 
 import jp.co.sample.domain.Employee;
 
+/**
+ * @author 土田真丸
+ *
+ */
 @Repository
 public class EmployeeRepository {
 	
