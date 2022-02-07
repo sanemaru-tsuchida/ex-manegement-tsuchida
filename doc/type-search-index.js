@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"jp.co.sample.domain","l":"Administrator"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"}];updateSearchResults();
