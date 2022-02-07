@@ -44,10 +44,12 @@ public class AdministratorRepository {
 	
 	/** メールアドレスとパスワードから管理者情報を取得する*/
 	public Administrator findByMailAddressAndPassword(String email,String pass) {
-		String sql = "SELECT name,mail_address,password  FROM administrators WHERE mail_address=:email AND password=:pass";
+		
+		String sql = "SELECT id,name,mail_address,password  FROM administrators WHERE mail_address=:email AND password=:pass";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("email", email).addValue("pass", pass);
 		
 		try {
+			/**　ここSQLのid,name,mail_address,passwordとROW_MAPPERのid,name,mail_address,passwordを同じにしないとエラー出るので注意*/
 			return template.queryForObject(sql, param, ADOM_ROW_MAPPER);
 		}catch (Exception e) {
 			return null;
