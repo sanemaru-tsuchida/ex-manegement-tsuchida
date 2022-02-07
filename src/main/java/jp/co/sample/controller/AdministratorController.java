@@ -1,14 +1,18 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.repository.AdministratorRepository;
 import jp.co.sample.service.AdministratorService;
 
@@ -17,20 +21,32 @@ import jp.co.sample.service.AdministratorService;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 public class AdministratorController {
 	@Autowired
 	private AdministratorService service;
+	@Autowired
+	private HttpSession session;
+	
 	
 	@ModelAttribute
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 		}
+	@ModelAttribute
+	public LoginForm loginForm() {
+		return new LoginForm();
+	}
+	@RequestMapping("/")
+	public String toLogin() {
+		return "administrator/login.html";
+	}
 	
 	@RequestMapping("/toInsert")
 	public String toInsert() {
 		return "administrator/insert";
 	}
+	
 	@RequestMapping("/insert")
 	public String insert(InsertAdministratorForm form) {
 		Administrator administrator = new Administrator();
@@ -38,7 +54,18 @@ public class AdministratorController {
 		administrator.setPass(form.getPassword());
 		administrator.setEmail(form.getMailAddress());
 		service.insert(administrator);
-		return "//toInsert";
+		return "/toInsert";
+	}
+	@RequestMapping("/login")
+	public String login(LoginForm form,Model model) {
+		Administrator administrator = service.login(form.getMailAddress(), form.getPassword());
+		if(administrator == null) {
+			model.addAttribute("not", "メールアドレスまたはパスワードが不正です。");
+			return "forward:/";
+		}else {
+			session.setAttribute("administratorName", administrator);
+			return "forward:/employee/showList";
+		}
 	}
 	
 }
