@@ -22,8 +22,14 @@ public class EmployeeService {
 	public List<Employee> showList(){
 		return repository.findAll();
 	}
+	
 	/** 従業員情報を取得する。 */
 	public Employee showDetail(Integer id) {
 		return repository.load(id);
+	}
+	
+	//** 従業員情報を更新する。*/
+	public void update(Employee employee) {
+		repository.update(employee);
 	}
 }
