@@ -16,12 +16,13 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository repository;
 	
-	//** 管理者情報を挿⼊する。 administratorRepository の insert()メソッドを呼ぶ*/
+	//** 管理者情報を挿⼊する。 administratorRepository の insert()メソッドを呼ぶ。*/
 	public void insert(Administrator administrator) {
 		repository.insert(administrator);
 	}
-	//** ログイン処理をする。administratorRepository のfindByMailAddressAndPassword ()メソッドを呼ぶ処理を記述する*/
+	//** ログイン処理をする。administratorRepository のfindByMailAddressAndPassword ()メソッドを呼ぶ処理を記述する。*/
 	public Administrator login(String mailAddress,String password) {
+	
 		return 	repository.findByMailAddressAndPassword(mailAddress, password);
 
 	}
