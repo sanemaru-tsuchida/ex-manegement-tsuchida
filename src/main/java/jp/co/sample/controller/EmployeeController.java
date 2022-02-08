@@ -35,4 +35,10 @@ public class EmployeeController {
 		
 		return "employee/list";
 	}
+	
+	@RequestMapping("/showDetail")
+	public String showDetail(String id,Model model) {
+		model.addAttribute("employee", service.showDetail(Integer.parseInt(id)));
+		return "employee/detail";
+	}
 }
