@@ -56,6 +56,7 @@ public class AdministratorController {
 		service.insert(administrator);
 		return "/toInsert";
 	}
+	//** ログアウトする機能*/
 	@RequestMapping("/login")
 	public String login(LoginForm form,Model model) {
 		Administrator administrator = service.login(form.getMailAddress(), form.getPassword());
