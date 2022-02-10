@@ -59,11 +59,14 @@ public class AdministratorController {
 		administrator.setPass(form.getPassword());
 		administrator.setEmail(form.getMailAddress());
 		service.insert(administrator);
-		return "/toInsert";
+		return "redirect:/";
 	}
 	//** ログアウトする機能*/
 	@RequestMapping("/login")
-	public String login(LoginForm form,Model model) {
+	public String login(@Validated LoginForm form,BindingResult result,Model model) {
+		if(result.hasErrors()){
+			return toLogin();
+			}
 		Administrator administrator = service.login(form.getMailAddress(), form.getPassword());
 		
 		if(administrator == null) {
