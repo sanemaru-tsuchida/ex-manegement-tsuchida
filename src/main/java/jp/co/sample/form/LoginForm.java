@@ -13,6 +13,7 @@ public class LoginForm {
 	/** パスワード*/
 	@NotBlank(message = "パスワードは必須です。")
 	private String password;
+	
 	public String getMailAddress() {
 		return mailAddress;
 	}

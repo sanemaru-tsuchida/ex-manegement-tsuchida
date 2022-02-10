@@ -90,6 +90,9 @@
 							    </th>
 							    <td>
 							      <span th:text="${#dates.format(employee.hierDate,'yyyy/MM/dd')}">2012/11/29</span>
+							      <input type="hidden" name="id"th:value="${employee.id}">
+									<input type="text" name="hierDate" id="hierDate" class="form-control" th:value="${#dates.format(employee.hierDate,'yyyy/MM/dd')}">
+
 							    </td>
 							  </tr>
 							  <tr>

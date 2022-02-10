@@ -4,6 +4,8 @@ package jp.co.sample.controller;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,17 +31,25 @@ public class EmployeeController {
 	public UpdateEmployeeForm setUpdateEmployeeForm() {
 		return new UpdateEmployeeForm();
 	}
+	@Autowired
+	private HttpSession session;
 	
 	//**従業員⼀覧を出⼒する。*/
 	@RequestMapping("/showList")
 	public String showList(Model model) {
 		model.addAttribute("employeeList", service.showList());
+		if(session.getAttribute("administratorName")==null) {
+			return "forward:/";
+		}
 		
 		return "employee/list";
 	}
 	
 	@RequestMapping("/showDetail")
 	public String showDetail(String id,Model model) {
+		if(session.getAttribute("administratorName")==null) {
+			return "forward:/";
+		}
 		model.addAttribute("employee", service.showDetail(Integer.parseInt(id)));
 		return "employee/detail";
 	}
